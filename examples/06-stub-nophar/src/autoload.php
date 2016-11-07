@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function ($class) {
-    $file = __DIR__ . DIRECTORY_SEPARATOR . str_replace(['\\', '_'], DIRECTORY_SEPARATOR, $class) . '.php';
+    $file = __DIR__ . '/' . str_replace(['\\', '_'], '/', $class) . '.php';
     if (is_file($file)) {
         require $file;
     }

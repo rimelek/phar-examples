@@ -4,7 +4,7 @@ $exampleDirs = new GlobIterator('examples/*', FilesystemIterator::SKIP_DOTS);
 
 function getPathOfExecutable(SplFileInfo $example)
 {
-    return $example->getPathname() . DIRECTORY_SEPARATOR . $example->getFilename() . '.phar.php';
+    return $example->getPathname() . '/' . $example->getFilename() . '.phar.php';
 }
 
 function isBuilt(SplFileInfo $example)

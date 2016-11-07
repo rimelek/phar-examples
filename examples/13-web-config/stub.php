@@ -1,6 +1,6 @@
 <?php
 
-$configPath = __DIR__ . '\config.php';
+$configPath = __DIR__ . '/config.php';
 
 if (is_file($configPath)) {
     Phar::mount('config.php', $configPath);
