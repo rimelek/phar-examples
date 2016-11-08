@@ -12,7 +12,7 @@ Phar::webPhar('self.phar', 'welcome', '404.php', [], function ($uri) use($config
 
     $routing = [
         '/welcome' => 'index.php',
-        '/config.php' => false,
+        '/config\.php' => false,
     ];
 
     foreach ($routing as $pattern => $destination) {
