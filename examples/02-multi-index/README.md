@@ -13,5 +13,5 @@ so you have to protect it yourself.
 
 When you open it from the web browser (as web application), you will be redirected to
 the web-index.php. In case you run it included in other script or from command line,
-it show you the output of phpinfo() (cli-index.php). Note that your cli-index.php 
+it shows you the output of phpinfo() (cli-index.php). Note that your cli-index.php 
 is not protected yet!
