@@ -35,8 +35,15 @@ foreach ($exampleDirs as $dir) {
     $built = isBuilt($dir);
     $executablePath = getPathOfExecutable($dir);
     $readmePath = $dir->getPathname() . '/README.md';
+    $readme = is_file($readmePath) ? file_get_contents($readmePath) : '';
+    if ($readme) {
+        $readme = preg_replace_callback('~\[code\]\(([^\)]+)\)~ms', function ($matches) use ($dir) {
+            return sprintf('[file: %1$s](%2$s/%1$s)', $matches[1], $dir->getPathname())
+                . "\n```\n" . file_get_contents($dir->getPathname() . '/' . $matches[1]) . "\n```\n";
+        }, $readme);
+    }
     $examples[] = [
-        'readme' => is_file($readmePath) ? file_get_contents($readmePath) : '',
+        'readme' => $readme,
         'name' => $dir->getFilename(),
         'dir' => $dir->getPathname(),
         'built' => $built,
@@ -68,7 +75,7 @@ foreach ($exampleDirs as $dir) {
                         <a class="pharex-toggle-details btn btn-info" href="javascript:">Details</a>
                     </span>
                     <?= $example['name'] ?>
-                    <div class="pharex-details alert alert-info" style="display: none;"><?= $example['readme'] ?></div>
+                    <div class="pharex-details alert alert-info" style="display: none;"><?= htmlspecialchars($example['readme']) ?></div>
 
                 </li>
                 <?php endforeach ?>
@@ -77,7 +84,7 @@ foreach ($exampleDirs as $dir) {
         <script>
             var converter = new showdown.Converter();
             $('.pharex-details').each(function () {
-                $(this).html(converter.makeHtml($(this).html()));
+                $(this).html(converter.makeHtml($(this).text()));
             });
             $('#examples .pharex-toggle-details').on('click', function (evt) {
                 evt.preventDefault();
