@@ -5,5 +5,6 @@ the appropriate response.
 
 You do not actually need more index files handled by default stub.
 
-[code](index.php)
-[code](src/index.php)
+[code:index.php](index.php)
+
+[code:src/index.php](src/index.php)

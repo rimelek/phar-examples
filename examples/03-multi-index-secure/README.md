@@ -4,4 +4,4 @@ It is very similar to the previous example. You still have two different index f
 but cli-index.php is finally protected. In order to protect a file you need to check 
 the current SAPI using []php_sapi_name()](http://php.net/manual/en/function.php-sapi-name.php)
 
-[code](src/cli-index.php)
+[code:cli-index.php](src/cli-index.php)

@@ -37,9 +37,9 @@ foreach ($exampleDirs as $dir) {
     $readmePath = $dir->getPathname() . '/README.md';
     $readme = is_file($readmePath) ? file_get_contents($readmePath) : '';
     if ($readme) {
-        $readme = preg_replace_callback('~\[code\]\(([^\)]+)\)~ms', function ($matches) use ($dir) {
-            return sprintf('[file: %1$s](%2$s/%1$s)', $matches[1], $dir->getPathname())
-                . "\n```\n" . file_get_contents($dir->getPathname() . '/' . $matches[1]) . "\n```\n";
+        $readme = preg_replace_callback('~\[code(:([^\]]+))\]\(([^\)]+)\)~ms', function ($matches) use ($dir) {
+            return sprintf('[file: %1$s](%2$s/%1$s)', $matches[3], $dir->getPathname())
+                . "\n```\n" . file_get_contents($dir->getPathname() . '/' . $matches[3]) . "\n```\n";
         }, $readme);
     }
     $examples[] = [

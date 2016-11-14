@@ -25,5 +25,6 @@ inside the archive and metadata.
 
 Although this is like a normal function, you must write it uppercase or the archive will not work properly. 
 
-[code](index.php)
-[code](stub.php)
+[code:index.php](index.php)
+
+[code:stub.php](stub.php)
