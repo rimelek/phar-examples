@@ -25,3 +25,12 @@ const BASEDIR = __DIR__;
 // anywhere else
 require BASEDIR . '/path/inside/the/app.php';
 ```
+
+[code:stub.php](stub.php)
+
+[code:index.php](index.php)
+
+[code:src/index.php](src/index.php)
+
+[code:src/included.php](src/included.php)
+

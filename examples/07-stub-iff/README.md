@@ -15,3 +15,11 @@ This example shows you what happens when you
 * read a file in stub.php using relative path. (reads the external file)
 * read a file in the index.php inside the phar using relative path (reads the file depends on interceptFileFuncs)
 * read a file in the index.php inside the phar using absolute path (reads the file exactly what you wants to read)
+
+[code:stub.php](stub.php)
+
+[code:src/index.php](src/index.php)
+
+[code:file.txt](file.txt)
+
+[code:src/file.txt](src/file.txt)
