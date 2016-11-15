@@ -9,11 +9,3 @@ if (!file_exists($pharName)) {
 }
 
 require  $pharName;
-
-$external = filter_input(INPUT_GET, 'external');
-$link = [
-    'href' => '?external=' . (int)!$external,
-    'text' => $external ? 'Inernal' : 'External',
-];
-?>
-<a href="<?= $link['href'] ?>"><?= $link['text'] ?></a>
