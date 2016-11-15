@@ -9,7 +9,7 @@ very small.
 When you run it, you will see a dashboard where you can run the examples, 
 rebuild them and read the details of the chosen example.
 
-[![Dashboard](dashboard.jpg)](dashboard.jpg)
+[![Dashboard](https://github.com/rimelek/phar-examples/blob/master/dashboard.jpg)](https://github.com/rimelek/phar-examples/blob/master/dashboard.jpg)
 
 # Run it in Docker container
 
