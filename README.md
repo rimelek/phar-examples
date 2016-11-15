@@ -1,6 +1,4 @@
-# Usage examples of PHP Phar Archives
-
-## Run it in Docker container
+# Run it in Docker container
 
 ```
 docker run -it --rm -p 8080:80 rimelek/phar-examples
