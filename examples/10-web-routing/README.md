@@ -19,5 +19,5 @@ and redirect it to the real index.php inside the routing function in the 5th arg
 
 [code:stub.php](stub.php)
 
-[code:src/secret.txt](src/secret.txt) You should not be able to access this file.
+[code:src/secret.txt](src/secret.txt)
 
