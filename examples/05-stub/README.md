@@ -28,3 +28,11 @@ Although this is like a normal function, you must write it uppercase or the arch
 [code:index.php](index.php)
 
 [code:stub.php](stub.php)
+
+You may noticed the prefix "phar://" used inside the autoloader. 
+It was necessary because stub files are not actually a file inside the archive. 
+It is a loader script as if it were the phar file itself. \_\_FILE\_\_ contains the path 
+of the phar archive and when you want to load a file from a phar archive, you must use
+"phar://" as prefix to use phar stream wrapper. Other files loaded by the stub are not need this.
+\_\_FILE\_\_ and \_\_DIR\_\_ will already contain the prefix.
+
