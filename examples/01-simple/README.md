@@ -19,3 +19,5 @@ For example, when you need different index files.
 * This example use the default stub only for default index file.
 
 [code:index.php](index.php)
+
+[code:src/index.php](src/index.php)

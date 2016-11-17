@@ -1,7 +1,7 @@
 # Alias of the current phar archive
 
 When you need to refer to the current phar file, you can use 
-[Phar::running()](http://php.net/manual/en/phar.running.php). 
+[Phar::running()](http://php.net/manual/en/phar.running.php), but it returns nothing in a stub file. 
 \_\_FILE\_\_ contains the path of the phar too, when it is used in the stub file.
 The third way is setting an alias of the current phar file. 
 [Phar::mapPhar()](http://php.net/manual/en/phar.mapphar.php) is your friend in this case.

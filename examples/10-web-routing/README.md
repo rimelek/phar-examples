@@ -1,7 +1,7 @@
 # Implement your own routing
 
 Nothing is perfect so the default routing of webPhar() is also has some bug.
-It seems it does not support query string and the browser tries to download the file.
+It seems it does not support query string using built-in php server and the browser tries to download the file.
 It is not a huge problem since you can implement your own routing easily.
 
 ```php

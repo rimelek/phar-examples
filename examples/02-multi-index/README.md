@@ -9,7 +9,11 @@ The first is the file which will run from command line and the second is the ind
 the browser will redirect to. It still let you load the cli version from the browser, 
 so you have to protect it yourself.
 
-[code:cli-index.php](index.php)
+[code:index.php](index.php)
+
+[code:src/cli-index.php](src/cli-index.php)
+
+[code:src/web-index.php](src/web-index.php)
 
 When you open it from the web browser (as web application), you will be redirected to
 the web-index.php. In case you run it included in other script or from command line,
