@@ -1,6 +1,6 @@
 FROM php:7.0-alpine
 
-MAINTAINER Takács Ákos <rimelek@rimelek.hu>
+LABEL maintainer="Takács Ákos <rimelek@it-sziget.hu>"
 
 WORKDIR /app
 
