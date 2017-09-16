@@ -14,12 +14,12 @@ rebuild them and read the details of the chosen example.
 
 # Run it in Docker container
 
-```
+```bash
 docker run -it --rm -p 8080:80 itsziget/phar-examples
 ```
 
 or in the background:
 
-```
+```bash
 docker run -it -d -p 8080:80 --name phar-examples itsziget/phar-examples
 ```
