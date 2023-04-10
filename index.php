@@ -62,13 +62,20 @@ foreach ($exampleDirs as $dir) {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <script src="https://cdn.rawgit.com/showdownjs/showdown/2.1.0/dist/showdown.min.js"></script>
+        <style>
+            pre {
+                background-color: #f5f5f5;
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
             <ul class="list-group" id="examples">
                 <?php foreach ($examples as $example) : ?>
                 <li class="list-group-item example" id="pharex-<?= $example['name'] ?>">
-                    <span class="btn-group btn-group-xs">
+                    <span class="btn-group btn-group-sm">
                         <a class="pharex-build btn btn-primary" href="?build=<?= $example['name'] ?>" title="<?= $example['built'] ? 'built at ' . date('Y-m-d H:i:s', $example['builtAt']) : 'has not been built yet' ?>">(Re)Build</a>
                         <a class="pharex-runas-included btn btn-success <?= $example['built'] ? '' : 'disabled' ?>" href="<?= $example['dir'] ?>" target="_blank">Run as included script</a>
                         <a class="pharex-runas-webapp btn btn-success <?= $example['built'] ? '' : 'disabled' ?>" href="<?= $example['executablePath'] ?>" target="_blank">Run as web application</a>
