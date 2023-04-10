@@ -54,7 +54,7 @@ foreach ($exampleDirs as $dir) {
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Phar examples</title>
