@@ -1,6 +1,11 @@
+volumes:
+  output:
+
 services:
   app:
     build:
       context: .
     ports:
       - ${PORT:-8080}:80
+    volumes:
+      - output:/var/www/html/output
