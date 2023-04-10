@@ -1,4 +1,4 @@
-FROM php:7.0-alpine
+FROM php:8.2-alpine
 
 LABEL maintainer="Takács Ákos <rimelek@it-sziget.hu>"
 
