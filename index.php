@@ -2,12 +2,12 @@
 /* @var $exampleDirs SplFileInfo[] */
 $exampleDirs = new GlobIterator('examples/*', FilesystemIterator::SKIP_DOTS);
 
-function getPathOfExecutable(SplFileInfo $example)
+function getPathOfExecutable(SplFileInfo $example): string
 {
     return 'output/' . $example->getFilename() . '/example.phar.php';
 }
 
-function isBuilt(SplFileInfo $example)
+function isBuilt(SplFileInfo $example): bool
 {
     return is_file(getPathOfExecutable($example));
 }
@@ -37,7 +37,7 @@ foreach ($exampleDirs as $dir) {
     $readmePath = $dir->getPathname() . '/README.md';
     $readme = is_file($readmePath) ? file_get_contents($readmePath) : '';
     if ($readme) {
-        $readme = preg_replace_callback('~\[code(:([^\]]+))\]\(([^\)]+)\)~ms', function ($matches) use ($dir) {
+        $readme = preg_replace_callback('~\[code(:([^]]+))]\(([^)]+)\)~m', function ($matches) use ($dir) {
             return sprintf('[file: %1$s](%2$s/%1$s)', $matches[3], $dir->getPathname())
                 . "\n```php\n" . file_get_contents($dir->getPathname() . '/' . $matches[3]) . "\n```\n";
         }, $readme);
@@ -96,7 +96,7 @@ foreach ($exampleDirs as $dir) {
         <script>
             hljs.highlightAll();
             
-            var converter = new showdown.Converter();
+            let converter = new showdown.Converter();
             $('.pharex-details').each(function () {
                 $(this).html(converter.makeHtml($(this).text()));
             });
