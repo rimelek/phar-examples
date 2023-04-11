@@ -1,6 +1,6 @@
 <?php
 
-namespace Rimelek\PharExample\Example05\Exception;
+namespace Rimelek\PharExample\Example06\Exception;
 
 
 use Exception;

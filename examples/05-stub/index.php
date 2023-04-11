@@ -1,5 +1,7 @@
 <?php
 
+use Rimelek\PharExample\Example05\PHPInfo;
+
 $pharName = __DIR__ . '/../../output/' . basename(__DIR__) . '/example.phar.php';
 
 if (!file_exists($pharName)) {
@@ -11,6 +13,6 @@ if (!file_exists($pharName)) {
 
 require $pharName;
 
-$phpinfo = new \Rimelek\PharExample\Example05\PHPInfo(INFO_VARIABLES);
+$phpinfo = new PHPInfo(INFO_VARIABLES);
 
 $phpinfo->run();

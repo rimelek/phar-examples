@@ -1,9 +1,9 @@
 <?php
 
-namespace Rimelek\PharExample\Example05;
+namespace Rimelek\PharExample\Example06;
 
 
-use Rimelek\PharExample\Example05\Exception\PHPInfoException;
+use Rimelek\PharExample\Example06\Exception\PHPInfoException;
 
 class PHPInfo
 {
