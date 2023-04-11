@@ -7,12 +7,12 @@ use Rimelek\PharExample\Example05\Exception\PHPInfoException;
 
 class PHPInfo
 {
-    private $what;
+    private int $what;
 
     /**
      * @param int $what
      */
-    public function __construct($what = INFO_ALL)
+    public function __construct(int $what = INFO_ALL)
     {
         $this->what = $what;
     }
@@ -20,7 +20,7 @@ class PHPInfo
     /**
      * @throws PHPInfoException
      */
-    public function run()
+    public function run(): void
     {
         if (!phpinfo($this->what)) {
             throw new PHPInfoException('function phpinfo() has failed');
