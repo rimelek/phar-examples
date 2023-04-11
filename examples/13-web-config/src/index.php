@@ -5,17 +5,15 @@ if (!is_file(__DIR__ . '/config.php')) {
 require __DIR__ . '/config.php';
 
 ?>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Example: CSS and JS</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/default.css" type="text/css">
+    <title>Example: Mounted configuration file</title>
+    <link rel="stylesheet" href="<?= BASE_URL . '/css/default.css'?>" type="text/css">
 </head>
 <body>
-<div id="time">
-    <?= date('H:i:s') ?>
-</div>
+    <div id="time" class="hidden"><?= date('H:i:s') ?></div>
 
-<script src="<?= BASE_URL ?>/js/example.js"></script>
+    <script src="<?= BASE_URL . '/js/example.js'?>"></script>
 </body>
 </html>
