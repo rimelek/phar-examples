@@ -18,7 +18,7 @@ if ($buildRequest) {
     $dirName = basename($buildRequest);
     $exDir = 'examples/' . $dirName;
     $exFile = $exDir . '/index.php';
-    $pharFile = $exDir . '/' . $dirName . '/example.phar.php';
+    $pharFile =  'output/' . $dirName . '/example.phar.php';
 
     if (is_file($exFile)) {
         if (is_file($pharFile)) {
