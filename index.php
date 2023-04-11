@@ -59,11 +59,14 @@ foreach ($exampleDirs as $dir) {
         <meta charset="utf-8">
         <title>Phar examples</title>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-        <script src="https://cdn.rawgit.com/showdownjs/showdown/2.1.0/dist/showdown.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css">
-        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+        <link href="static/css/bootstrap-<?= getenv('STATIC_BOOTSTRAP_CSS_VERSION') ?>.min.css" rel="stylesheet">
+        <script src="static/js/jquery-<?= getenv('STATIC_JQUERY_JS_VERSION') ?>.min.js"></script>
+        
+        <link href="static/css/highlight-<?= getenv('STATIC_HIGHLIGHT_CSS_VERSION') ?>.min.css" rel="stylesheet">
+        <script src="static/js/highlight-<?= getenv('STATIC_HIGHLIGHT_JS_VERSION') ?>.min.js"></script>
+
+        <script src="static/js/showdown-<?= getenv('STATIC_SHOWDOWN_JS_VERSION') ?>.min.js"></script>
+        
         <style>
             pre {
                 background-color: #f5f5f5;
