@@ -13,7 +13,7 @@ Phar::webPhar('self.phar', 'index.php', '404.php', [], function ($uri) {
 
 You can also have custom 404 error page and protecting a file is also possible. 
 You can redirect any request to a real file, but the index file in webPhar's 
-second argument must exists. As a workaround, you can create a file "welcome" inside 
+second argument must exist. As a workaround, you can create a file "welcome" inside 
 the phar that will never be used and now, you can set "welcome" as default index
 and redirect it to the real index.php inside the routing function in the 5th argument.
 

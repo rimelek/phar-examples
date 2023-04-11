@@ -8,7 +8,7 @@ Phar::webPhar('self.phar', 'welcome', '404.php', [], function ($uri) {
         '/secret.txt' => false,
     ];
 
-    return isset($routing[$path]) ? $routing[$path] : $path;
+    return $routing[$path] ?? $path;
 });
 
 echo 'Can you see me?';
