@@ -34,7 +34,7 @@ COPY index.php LICENSE README.md /var/www/html/
 
 RUN mkdir /var/www/html/output \
  && chown www-data:www-data /var/www/html/output \
- && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \   
+ && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
  && echo "phar.readonly = Off" >> "$PHP_INI_DIR/php.ini"
 
 EXPOSE 80
