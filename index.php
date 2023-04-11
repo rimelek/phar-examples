@@ -39,7 +39,7 @@ foreach ($exampleDirs as $dir) {
     if ($readme) {
         $readme = preg_replace_callback('~\[code(:([^\]]+))\]\(([^\)]+)\)~ms', function ($matches) use ($dir) {
             return sprintf('[file: %1$s](%2$s/%1$s)', $matches[3], $dir->getPathname())
-                . "\n```\n" . file_get_contents($dir->getPathname() . '/' . $matches[3]) . "\n```\n";
+                . "\n```php\n" . file_get_contents($dir->getPathname() . '/' . $matches[3]) . "\n```\n";
         }, $readme);
     }
     $examples[] = [
@@ -62,6 +62,8 @@ foreach ($exampleDirs as $dir) {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <script src="https://cdn.rawgit.com/showdownjs/showdown/2.1.0/dist/showdown.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
         <style>
             pre {
                 background-color: #f5f5f5;
@@ -89,6 +91,8 @@ foreach ($exampleDirs as $dir) {
             </ul>
         </div>
         <script>
+            hljs.highlightAll();
+            
             var converter = new showdown.Converter();
             $('.pharex-details').each(function () {
                 $(this).html(converter.makeHtml($(this).text()));
