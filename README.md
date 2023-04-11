@@ -3,7 +3,7 @@
 This project contains examples how to use PHP Phar archives. 
 Under "[examples](https://github.com/itsziget/phar-examples/tree/master/examples)", 
 you can find more folders with examples. Each folder contains a README.md. 
-You can read it on github or you can download this PHP application from github
+You can read it on GitHub or you can download this PHP application from GitHub
 or as a Docker image from [Docker Hub](https://hub.docker.com/r/itsziget/phar-examples/). The image Based on alpine linux to keep it 
 very small.
 

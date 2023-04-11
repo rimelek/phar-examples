@@ -27,7 +27,7 @@ function download() {
   
   integrity_actual_hash="$(< "$local_path" openssl dgst "-$integrity_expected_algo" -binary | openssl base64 -A)"
   
-  >&2 echo "Check integirty of $url"
+  >&2 echo "Check integrity of $url"
   if [[ "$integrity_expected_hash" != "$integrity_actual_hash" ]]; then
     >&2 echo "Integrity check failed for $url"
     return 1
