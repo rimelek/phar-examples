@@ -11,7 +11,7 @@ jobs:
       CI_REPOSITORY_URL: "<< pipeline.project.git_url >>.git"
       CI_DEBUG: "true"
 
-      CI_IMAGE_NAME: rimelek/testelek
+      CI_IMAGE_NAME: rimelek/phar-examples
       CI_IMAGE_NAME_ALTERNATIVE: ""
       CI_PARENT_IMAGE: php:8.2-apache
     resource_class: medium
