@@ -1,0 +1,23 @@
+services:
+  socat:
+    image: alpine/socat
+    command: tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+    user: root
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    network_mode: host
+
+  ci:
+    depends_on:
+      - socat
+    build:
+      dockerfile: ci/local-builder.Dockerfile
+      context: ..
+    # ./ci/build.sh -i "rimelek/test2" -t "" -b "2.0-dev" -T "500" -e "push" -B "9999"
+    environment:
+      DOCKER_HOST: localhost:2375
+    network_mode: host
+    stdin_open: true
+

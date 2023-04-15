@@ -1,0 +1,10 @@
+version: "3.7"
+
+volumes:
+  home:
+
+services:
+  ci:
+    volumes:
+      - "$WORKDIR:$WORKDIR"
+      - home:/home/circleci
