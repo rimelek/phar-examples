@@ -9,8 +9,7 @@ or as a Docker image from [Docker Hub](https://hub.docker.com/r/rimelek/phar-exa
 When you run it, you will see a dashboard where you can run the examples, 
 rebuild them and read the details of the chosen example.
 
-![Dashboard](https://ams03pap005files.storage.live.com/y4mfw4MCLD0ohxT_oJ5XslpmjTgJQlR_3j1TE6rPyxcZ6Z0aaIoZS86y5qBmXci3nx7EnzyAy4reiX19UQHFObH1XCxoUGGUUWzuO8-GLnLRp_bUHOCxZOhGesazmx85RwbvaF9wmYIYUoSOeTuoxUnXGle5uCwfHmoU60f16iaZo7LjSshDGKu7NUvQBUHUSb5?width=1024&height=655&cropmode=none)](https://ams03pap005files.storage.live.com/y4mfw4MCLD0ohxT_oJ5XslpmjTgJQlR_3j1TE6rPyxcZ6Z0aaIoZS86y5qBmXci3nx7EnzyAy4reiX19UQHFObH1XCxoUGGUUWzuO8-GLnLRp_bUHOCxZOhGesazmx85RwbvaF9wmYIYUoSOeTuoxUnXGle5uCwfHmoU60f16iaZo7LjSshDGKu7NUvQBUHUSb5?width=1024&height=655&cropmode=none)
-
+![Dashboard](https://ams03pap005files.storage.live.com/y4mfw4MCLD0ohxT_oJ5XslpmjTgJQlR_3j1TE6rPyxcZ6Z0aaIoZS86y5qBmXci3nx7EnzyAy4reiX19UQHFObH1XCxoUGGUUWzuO8-GLnLRp_bUHOCxZOhGesazmx85RwbvaF9wmYIYUoSOeTuoxUnXGle5uCwfHmoU60f16iaZo7LjSshDGKu7NUvQBUHUSb5?width=1024&height=655&cropmode=none)
 # Run it in Docker container
 
 ```bash
