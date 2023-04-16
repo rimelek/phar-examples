@@ -6,7 +6,12 @@ dir="$(cd "$(dirname "$0")" && pwd)"
 
 cd "$dir"
 
-if [[ -f ".env" ]]; then
+port="${1:-}"
+
+if [[ -n "$port" ]]; then
+  export PORT="$port"
+elif [[ -f ".env" ]]; then
+  # Only for showing the URL. Compose would load the file without it.
   source .env
 fi
 
