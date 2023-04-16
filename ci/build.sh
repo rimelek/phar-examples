@@ -14,7 +14,6 @@ export CI_EVENT_TYPE=""
 export CI_REPOSITORY_ALIAS="origin"
 export CI_REPOSITORY_URL=""
 export CI_BUILD_NUMBER="$GIT_HASH"
-export CI_PARENT_IMAGE=""
 export CI_DEBUG=""
 
 while getopts ":t:b:i:e:r:R:B:p:dh" opt; do
@@ -26,7 +25,6 @@ while getopts ":t:b:i:e:r:R:B:p:dh" opt; do
   R) CI_REPOSITORY_URL="$OPTARG" ;;
   B) CI_BUILD_NUMBER="$OPTARG" ;;
   d) CI_DEBUG="true" ;;
-  p) CI_PARENT_IMAGE="$OPTARG" ;;
   e)
     case "$OPTARG" in
     push | cron) CI_EVENT_TYPE="$OPTARG" ;;
@@ -85,7 +83,9 @@ if [[ "$CI_EVENT_TYPE" == "cron" ]]; then
       write_info "The name of the branch is not a minor version: $CI_BRANCH"
     fi
   else
-    write_info "The build was not triggerd by pushing to a branch"
+    # Cannot happen normally, unless the CI_EVENT_TYPE variable is set incorrectly
+    write_info "The build was not triggered by pushing to a branch"
+    write_info "Check if CI_EVENT_TYPE is set incorrectly. CI_EVENT_TYPE=$CI_EVENT_TYPE"
   fi
 else
   write_info "Start building triggered by pushing to a branch: $CI_BRANCH"

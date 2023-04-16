@@ -13,7 +13,6 @@ jobs:
 
       CI_IMAGE_NAME: rimelek/phar-examples
       CI_IMAGE_NAME_ALTERNATIVE: ""
-      CI_PARENT_IMAGE: php:8.2-apache
     resource_class: medium
     machine:
       image: ubuntu-2204:2022.04.1
@@ -38,7 +37,7 @@ workflows:
           filters:
             branches:
               only:
-                - /^\d+\.\d+(-dev)?$/
+                - /^\d+\.\d+$/
 
   tagged-build:
     jobs:

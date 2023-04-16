@@ -3,7 +3,7 @@
 GIT_HASH="$(git rev-list -n 1 HEAD)"
 PATTERN_MINOR_BRANCH='^\([0-9]\+\.[0-9]\+\)\(-dev\)\?$'
 PATTERN_STABLE_VERSION='[0-9]\+\.[0-9]\+\.[0-9]\+'
-export CI_PLATFORMS="linux/amd64,linux/arm64/v8"
+export CI_PLATFORMS="linux/amd64,linux/arm64"
 
 function get_current_time() {
   date +'%Y-%m-%d %H:%M:%S %Z'
@@ -151,15 +151,15 @@ function getLatestStableVersionOfMinor() {
 function isValidSemanticVersion() {
   local VERSION="$1"
   local RESULT
-  RESULT="$(python -c "import semantic_version; print(semantic_version.validate('$VERSION'))")"
-  [[ "$RESULT" == "True" ]] && echo "true" || echo "false"
+  RESULT="$(echo "$VERSION" | awk '/^[0-9]+\.[0-9]+\.[0-9]+(-[a-z]+(\.[0-9]+)?)?(\+[a-z0-9-]+)?$/ {print $0}')"
+  [[ -n "$RESULT" ]] && echo "true" || echo "false"
 }
 
 function isPreRelease() {
   local VERSION="$1"
   local RESULT
-  RESULT="$(python -c "import semantic_version; print(len(semantic_version.Version('$VERSION').prerelease) > 0)")"
-  [[ "$RESULT" == "True" ]] && echo "true" || echo "false"
+  RESULT="$(echo "$VERSION" | awk '/^[0-9]+\.[0-9]+\.[0-9]+-[a-z]+(\.[0-9]+)?(\+[a-z0-9-]+)?$/ {print $0}')"
+  [[ -n "$RESULT" ]] && echo "true" || echo "false"
 }
 
 function toMinorDevVersion() {
@@ -375,10 +375,7 @@ function docker_build() {
   build_context="$(pwd)"
   file="$build_context/Dockerfile"
 
-  command=(docker buildx build "$build_context" --file "$file" --pull --push --progress plain)
-  if [[ "${CI_PLATFORMS+x}" == "x" ]] && [[ -n "$CI_PLATFORMS" ]]; then
-    command+=(--platform "$CI_PLATFORMS")
-  fi
+  command=(docker buildx build "$build_context" --file "$file" --pull --progress plain)
   command+=("$@")
 
   write_info "Build context: $build_context"
@@ -388,12 +385,86 @@ function docker_build() {
   execute_command "${command[@]}"
 }
 
+function docker_build_cache() {
+  local platform
+  local GIT_HASH
+  GIT_HASH="$(git rev-list -n 1 HEAD)"
+
+  local cache_from_args
+  local cache_to_args
+
+  reqVarNonEmpty CI_PLATFORMS
+  reqVarNonEmpty CI_IMAGE_NAME
+  for platform in ${CI_PLATFORMS//,/ }; do
+    # Required to do it separately, otherwise caches would override each other leaving cache for only one platform.
+    
+    write_info "Set cache image tags for platform: $platform"
+    
+    # cache from previous builds (commit hash is not the same, but the branch is)
+    cache_from_args=()
+    cache_to_args=()
+    if [ "$(isBranch)" == "true" ]; then
+      branch_cache="$CI_BRANCH"
+      if [ "${branch_cache:${#branch_cache}-4}" != "-dev" ]; then
+        branch_cache="$branch_cache-dev"
+      fi
+      cache_from_args+=(--cache-from "$CI_IMAGE_NAME:cache-${platform//\//-}-$branch_cache")
+      # same tag to update it for future builds
+      cache_to_args+=(--cache-to "$CI_IMAGE_NAME:cache-${platform//\//-}-$branch_cache")
+    fi
+
+    # for rebuilding the same commit
+    
+    ## In case of rebuilding a semantic version tag, use the previous build as cache
+    ## This way if nothing has changed, no new layers will be generated
+    cache_from_args+=(--cache-from "$CI_IMAGE_NAME:cache-${platform//\//-}-$GIT_HASH")
+    ## update the cache for the current build process
+    cache_to_args+=(--cache-to "$CI_IMAGE_NAME:cache-${platform//\//-}-$GIT_HASH")
+    
+    write_info "Generate cache for platform: $platform"
+    docker_build \
+      --platform "$platform" \
+      "${cache_from_args[@]}" \
+      "${cache_to_args[@]}"
+  done
+}
+
+function docker_build_push() {
+    local platform
+    local GIT_HASH
+    GIT_HASH="$(git rev-list -n 1 HEAD)"
+    
+    local cache_from_args
+      
+    reqVarNonEmpty CI_PLATFORMS
+    reqVarNonEmpty CI_IMAGE_NAME
+    reqVarNonEmpty CI_BRANCH
+      
+    cache_from_args=()
+    for platform in ${CI_PLATFORMS//,/ }; do
+      cache_from_args+=(--cache-from "$CI_IMAGE_NAME:cache-${platform//\//-}-$GIT_HASH")
+    done
+    
+    write_info "Merge platforms and push the image"
+    command=(
+      docker_build \
+        --platform "$CI_PLATFORMS" \
+        "${cache_from_args[@]}" \
+        --tag "$CI_IMAGE_NAME:$GIT_HASH" \
+        --tag "$CI_IMAGE_NAME:build-$CI_BUILD_NUMBER" \
+        --push
+        "$@"
+    )
+    "${command[@]}"
+}
+
 function docker_tag() {
   local tag_src="$1"
   shift
   local tag_dsts=("$@")
   local command
-  command=(docker_build --cache-from "$tag_src")
+
+  command=(docker_build_push --cache-from "$tag_src")
   local i
   for i in "${tag_dsts[@]}"; do
     command+=(--tag "$i")

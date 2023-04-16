@@ -9,7 +9,6 @@ command=(
   -e "$CI_EVENT_TYPE"
   -B "circleci-$CIRCLE_BUILD_NUM"
   -R "$CI_REPOSITORY_URL"
-  -p "$CI_PARENT_IMAGE"
 )
 
 if [[ "${CI_DEBUG+x}" == "x" ]] && [[ "$CI_DEBUG" != "" ]]; then

@@ -6,7 +6,7 @@ if [[ -z "${COPY_MODE+x}" ]]; then
   COPY_MODE=0
 fi
 
-compose=(docker-compose -f local-builder.yml)
+compose=(docker compose --ansi never -f local-builder.yml)
 
 (
   cd "$(dirname "$0")"

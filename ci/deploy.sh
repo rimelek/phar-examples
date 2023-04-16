@@ -78,7 +78,7 @@ VERSION=$(echo "$CI_BRANCH" | trimVersionFlag)
 
 write_info "VERSION=$VERSION"
 
-write_info "Download python requirements: "
+write_info "Download python requirements"
 pip_install_ci_requirements
 
 dcdCommandGen
