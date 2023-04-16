@@ -54,4 +54,14 @@ export PORT=9090
 
 Note: Export is necessary for `run.sh` to show the URL which can also become clickable in some IDE-s like PHPStorm.
 
-For supported tags, check the [description on Docker Hub](https://hub.docker.com/r/rimelek/phar-examples/).
+Supported tags
+--------------
+
+**Note:** The below table can also contain planned tags that are waiting for to be built and pushed to Docker Hub.
+For more accurate information visit the [description on Docker Hub](https://hub.docker.com/r/rimelek/phar-examples/)
+which is updated the new images were pushed.
+
+|                               Dockerfile                                | Major | Minor | Patch |
+|:-----------------------------------------------------------------------:|:-----:|:-----:|:-----:|
+| [Link](https://github.com/rimelek/phar-examples/blob/v2.0.1/Dockerfile) |   2   |  2.0  | 2.0.1 |
+| [Link](https://github.com/rimelek/phar-examples/blob/v1.0.0/Dockerfile) |   1   |  1.0  | 1.0.0 |
