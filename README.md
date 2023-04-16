@@ -27,3 +27,31 @@ or in the background:
 ```bash
 docker run -d -p 8080:80 --name phar-examples rimelek/phar-examples
 ```
+
+Use a volume if you want to keep the already built examples
+
+```bash
+docker run -d -p 8080:80 --name phar-examples -v phar-examples_output:/var/www/html/output rimelek/phar-examples
+```
+
+If you clone the repository, you can also use the `run.sh` to make the container available on port 8080
+
+```bash
+./run.sh
+```
+
+If port 8080 is not available, you can pass another port:
+
+```bash
+./run.sh 9090
+```
+
+or save a `.env` file with an exported port
+
+```bash
+export PORT=9090
+```
+
+Note: Export is necessary for `run.sh` to show the URL which can also become clickable in some IDE-s like PHPStorm.
+
+For supported tags, check the [description on Docker Hub](https://hub.docker.com/r/rimelek/phar-examples/).
