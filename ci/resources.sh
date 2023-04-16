@@ -474,6 +474,9 @@ function docker_tag() {
 }
 
 function pip_install_ci_requirements() {
+  if ! command -v pip &>/dev/null ; then
+    return 0
+  fi
   for i in "./ci/requirements.txt" "./requirements.txt"; do
     if [[ -f "$i" ]]; then
       execute_command pip install -r "$i"
