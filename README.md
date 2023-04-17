@@ -10,7 +10,7 @@ very small.
 When you run it, you will see a dashboard where you can run the examples, 
 rebuild them and read the details of the chosen example.
 
-[![Dashboard](https://raw.githubusercontent.com/itsziget/phar-examples/master/dashboard.jpg)](https://github.com/itsziget/phar-examples/blob/master/dashboard.jpg)
+![Dashboard](https://ams03pap005files.storage.live.com/y4m64jYmBFX9HooTb_aXEmg0xs-21Zx2HCB5vxtnssuXHfFbu1nV1c6OafI5h1qgzAkvHy0_ekR9QyDmJz5QzTiVC-DVRePamSie5SwS5EsuXlaThbD34SnPPmMPJh6DGFh-Thv0eFlpz9TG0B8mkvldX_5UtuYJs66b3j5x89AoLqKjGKmT6YyC_My18OM5Pn-?width=607&height=436&cropmode=none)
 
 # Run it in Docker container
 
