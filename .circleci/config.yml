@@ -26,8 +26,8 @@ jobs:
           command: ./.circleci/step-build-docker-image.sh
 
       - run:
-          name: Deploy Docker image
-          command: ./.circleci/step-deploy-docker-image.sh
+          name: Push Docker image
+          command: ./.circleci/step-push-docker-image.sh
 
 workflows:
   version: 2

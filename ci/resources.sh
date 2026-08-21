@@ -195,7 +195,7 @@ function isImageDownloaded() {
   docker image inspect "$IMAGE" &>/dev/null && echo 'true' || echo 'false'
 }
 
-function deployCommandGen() (
+function pushCommandGen() (
   local GIT_HASH
   GIT_HASH="$(git rev-list -n 1 HEAD)"
   local SEMANTIC_VERSION="false"
@@ -305,7 +305,7 @@ function dcdCommandGen() {
 
   write_info "Check event type: $CI_EVENT_TYPE"
   if [[ "$CI_EVENT_TYPE" == "cron" ]]; then
-    write_info "This deployment process was triggered by a cron job"
+    write_info "This push process was triggered by a cron job"
 
     # error checking
     if [[ "$(isBranch)" == "false" ]]; then
@@ -332,15 +332,15 @@ function dcdCommandGen() {
 
     write_info "This version number is not an empty string"
     reqVarNonEmpty CI_BUILD_NUMBER
-    deployCommandGen -v "$LATEST_VERSION" -i "$CI_IMAGE_NAME" -I "${CI_IMAGE_NAME_ALTERNATIVE:-}" -t "build-$CI_BUILD_NUMBER" -s
+    pushCommandGen -v "$LATEST_VERSION" -i "$CI_IMAGE_NAME" -I "${CI_IMAGE_NAME_ALTERNATIVE:-}" -t "build-$CI_BUILD_NUMBER" -s
   else
-    write_info "This deployment process was triggered by pushing to a branch or tagging a commit"
+    write_info "This push process was triggered by pushing to a branch or tagging a commit"
     if [ "$(isValidSemanticVersion "$VERSION")" == "true" ]; then
       write_info "$VERSION is a valid semantic version with major, minor and patch components."
-      deployCommandGen -v "$VERSION" -i "$CI_IMAGE_NAME" -I "${CI_IMAGE_NAME_ALTERNATIVE:-}" -s
+      pushCommandGen -v "$VERSION" -i "$CI_IMAGE_NAME" -I "${CI_IMAGE_NAME_ALTERNATIVE:-}" -s
     elif [ "$(isMinorBranch "$VERSION")" == "true" ]; then
       write_info "$VERSION looks like a version number with major and minor components."
-      deployCommandGen -T "$(toMinorDevVersion "$VERSION")" -i "$CI_IMAGE_NAME" -I "${CI_IMAGE_NAME_ALTERNATIVE:-}"
+      pushCommandGen -T "$(toMinorDevVersion "$VERSION")" -i "$CI_IMAGE_NAME" -I "${CI_IMAGE_NAME_ALTERNATIVE:-}"
     fi
   fi
 
