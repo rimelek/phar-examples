@@ -37,7 +37,7 @@ while getopts ":t:b:i:e:r:R:B:p:dh" opt; do
   h)
     echo "Usage: $0 [options]"
     echo "Options:"
-    echo -e "\t-t <string>\tGit commit tag if the build was triggered by tag. Do not use it anyway!"
+    echo -e "\t-t <string>\tGit commit tag if the build was triggered by tag. Do not use it otherwıse!"
     echo -e "\t-b <string>\tGit branch if the build was triggered by branch. If \"-t\" was given too, \"-b\" will always be ignored!"
     echo -e "\t-i <string>\tDocker image name without version tag."
     echo -e "\t-e <string>\tEvent type. Valid types: api, cron"
