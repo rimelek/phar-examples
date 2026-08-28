@@ -13,7 +13,7 @@ if [[ -d "$BUILD_DIR" ]]; then
   execute_command rm -rf "$BUILD_DIR"
 fi
 
-write_info "Check if the the repository URL is not defined or empty"
+write_info "Check if the repository URL is not defined or empty"
 if [[ "${CI_REPOSITORY_URL-x}" == "x" ]] || [[ -z "$CI_REPOSITORY_URL" ]]; then
   write_info "Repository URL is not defined."
   write_info "Get repository URL from the repository: $CI_REPOSITORY_ALIAS"
