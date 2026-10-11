@@ -15,7 +15,7 @@ jobs:
       CI_IMAGE_NAME_ALTERNATIVE: ""
     resource_class: medium
     machine:
-      image: ubuntu-2204:current
+      image: ubuntu-2404:2026.05.1
     steps:
       - checkout
       - run:
