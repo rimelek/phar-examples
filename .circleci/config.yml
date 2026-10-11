@@ -22,6 +22,11 @@ jobs:
           name: Docker login
           command: ./ci/local-builder.sh bash -c "echo \"$DOCKER_HUB_PASS\" | docker login -u \"$DOCKER_HUB_USER\" --password-stdin"
       - run:
+          name: Docker info
+          command: |
+            docker version
+            docker info -f '{{ .DriverStatus }}'
+      - run:
           name: Build Docker image
           command: ./.circleci/step-build-docker-image.sh
 
