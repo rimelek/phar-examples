@@ -429,6 +429,29 @@ function docker_build_cache() {
   done
 }
 
+function get_remote_platform_digests() {
+  local image="$1"
+  local image_index_info
+
+  image_index_info="$(docker buildx imagetools inspect "$image" --format "{{ json . }}" 2>/dev/null || true)"
+  if [[ -n "$image_index_info" ]]; then
+    # attestation manifests (unknown/unknown) are ignored, because the provenance is different for each build
+    echo "$image_index_info" | jq -r '.manifest.manifests[] | select(.platform.architecture != "unknown") | .digest' | sort
+  fi
+}
+
+function get_local_platform_digests() {
+  local image="$1"
+  local platform
+  local digests=""
+
+  reqVarNonEmpty CI_PLATFORMS
+  for platform in ${CI_PLATFORMS//,/ }; do
+    digests+="$(docker image inspect --platform="$platform" "$image" | jq -r '.[].Id')"$'\n'
+  done
+  echo -n "$digests" | sort
+}
+
 function docker_build_push() {
     local platform
     local GIT_HASH
@@ -452,10 +475,26 @@ function docker_build_push() {
         "${cache_from_args[@]}" \
         --tag "$CI_IMAGE_NAME:$GIT_HASH" \
         --tag "$CI_IMAGE_NAME:build-$CI_BUILD_NUMBER" \
-        --push
+        --load
         "$@"
     )
     "${command[@]}"
+
+    local remote_digests
+    local local_digests
+    remote_digests="$(get_remote_platform_digests "$CI_IMAGE_NAME:$GIT_HASH")"
+    local_digests="$(get_local_platform_digests "$CI_IMAGE_NAME:$GIT_HASH")"
+
+    write_info "Remote digests: $remote_digests"
+    write_info "Local digests: $local_digests"
+
+    if [[ "$local_digests" == "$remote_digests" ]]; then
+      write_info "Image is already up to date. Skipping push."
+    else
+      execute_command docker image push "$CI_IMAGE_NAME:$GIT_HASH"
+    fi
+
+    execute_command docker buildx imagetools create --tag "$CI_IMAGE_NAME:build-$CI_BUILD_NUMBER" "$CI_IMAGE_NAME:$GIT_HASH"
 }
 
 function docker_tag() {
@@ -464,11 +503,12 @@ function docker_tag() {
   local tag_dsts=("$@")
   local command
 
-  command=(docker_build_push --cache-from "$tag_src")
+  command=(docker buildx imagetools create)
   local i
   for i in "${tag_dsts[@]}"; do
     command+=(--tag "$i")
   done
+  command+=("$tag_src")
 
   execute_command "${command[@]}"
 }
